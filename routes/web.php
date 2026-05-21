@@ -14,17 +14,15 @@ use App\Http\Middleware\LogAcessoMiddleware;
 */
 
 
-Route::get('/', [App\Http\Controllers\Principal::class, 'principal']);
-
 Route::prefix('/aluno')->group(function(){
     Route::get('/index', [App\Http\Controllers\AlunoController::class, 'index'])->name('aluno.index');
-    Route::post('/adicionar', [App\Http\Controllers\AlunoController::class, 'adicionar'])->name('aluno.adicionar');
-    Route::post('/remover', [App\Http\Controllers\AlunoController::class, 'removerl'])->name('aluno.remover');
-    Route::post('/atualizar', [App\Http\Controllers\AlunoController::class, 'atualizar'])->name('aluno.atualizar');
-    Route::get('/consultar', [App\Http\Controllers\AlunoController::class, 'consultar'])->name('aluno.consultar');
+    Route::post('/add', [App\Http\Controllers\AlunoController::class, 'add'])->name('aluno.add');
+}); 
+Route::prefix('/curso')->group(function(){
+    Route::get('/index', [App\Http\Controllers\CursoController::class, 'index'])->name('curso.index');
 
+    Route::post('/add', [App\Http\Controllers\CursoController::class, 'add'])->name('curso.add');
 });
-//www.xuxa.com.br/aluno/adicionar
 
 
 
