@@ -23,17 +23,15 @@ class PostagemController extends Controller
 
     public function store(Request $request)
     {
+        // Alterado para 'required': bloqueia o envio no servidor se não houver imagem
         $request->validate([
             'titulo' => 'required',
             'comentario' => 'required',
-            'imagem' => 'nullable|image'
+            'imagem' => 'required|image' 
         ]);
 
-        $imagem = null;
-
-        if ($request->hasFile('imagem')) {
-            $imagem = $request->file('imagem')->store('postagens', 'public');
-        }
+        // Como a validação garante que o arquivo existe, salvamos direto
+        $imagem = $request->file('imagem')->store('postagens', 'public');
 
         // Salva a postagem atrelando ao ID do usuário autenticado no login
         Postagem::create([
